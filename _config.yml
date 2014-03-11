@@ -24,6 +24,7 @@ plugins:
   - assemble-contrib-anchors
   - assemble-contrib-wordcount
   - assemble-contrib-toc
+  - assemble-navigation
 
 # Theme
 theme:            theme

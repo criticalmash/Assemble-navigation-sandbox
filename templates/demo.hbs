@@ -6,6 +6,6 @@ slug: navigation
 lead: <%= site.description %>
 ---
 <h1>Demo of navigation.</h1>
-{{#each  navigation.main }} 
-	<li><a href="{{{url}}}" >{{{data.title}}}</a></li>
+{{#each  navigation.main.items }} 
+	<li><a href="{{{url}}}" >{{{title}}}</a></li>
 {{/each  }} 
