@@ -1,0 +1,23 @@
+---
+layout: sidebar.hbs
+
+title: Navigation Demo With a Very Long Title
+menu-title: Nav Demo
+slug: navigation
+lead: <%= site.description %>
+---
+<h1>Demo of navigation.</h1>
+
+<h2>Main nav</h2>
+<ul>
+{{#each  navigation.main.items }} 
+	<li><a href="{{{url}}}" >{{{title}}}</a></li>
+{{/each  }} 
+</ul>
+
+<h2>Footer nav</h2>
+<ul>
+{{#each  navigation.footer.items }} 
+	<li><a href="{{{url}}}" >{{{title}}}</a></li>
+{{/each  }} 
+</ul>

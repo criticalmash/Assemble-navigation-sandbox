@@ -13,6 +13,20 @@
       <ul class="nav navbar-nav">
         <li> <a href="{{relative page.dest "_gh_pages/markdown.html"}}">Markdown</a> </li>
         <li> <a href="{{relative page.dest "_gh_pages/readme.html"}}">Readme</a> </li>
+        {{#each  navigation.main.items }} 
+          {{#if items.length}}
+            <li class="dropdown">
+              <a href="{{relative page.dest url}}" class="dropdown-toggle" data-toggle="dropdown">{{{title}}} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                {{#each items }} 
+                  <li><a href="{{relative page.dest url}}" >{{{title}}}</a></li>
+                {{/each}}
+              </ul>
+            </li>
+          {{else}}
+            <li><a href="{{{url}}}" >{{{title}}}</a></li>
+          {{/if}}
+        {{/each}}
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li> <a href="{{relative page.dest "_gh_pages/about.html"}}">About</a> </li>

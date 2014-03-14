@@ -63,10 +63,20 @@ module.exports = function(grunt) {
 
         // Extensions
         helpers: '<%= site.helpers %>',
-        plugins: '<%= site.plugins %>'
+        plugins: '<%= site.plugins %>',
+
+        // navigation
+        navigation: {
+          'main': {},
+          'footer': {}
+        }
       },
       example: {
-        files: {'<%= site.dest %>/': ['<%= site.templates %>/*.hbs']}
+        //files: {'<%= site.dest %>/': ['<%= site.templates %>/*.hbs']}
+        expand: true, // use extra file management features
+        cwd: 'templates/pages/', // we're telling grunt to use pages dir as our copy root
+        src: '**/*.hbs',
+        dest: '<%= site.dest %>/' // whatevers in docs is now in here
       }
     },
 
@@ -120,6 +130,14 @@ module.exports = function(grunt) {
         files: ['Gruntfile.js', '<%= less.options.paths %>/*.less', 'templates/**/*.hbs'],
         tasks: ['design']
       }
+    },
+    connect: {
+      server: {
+        options: {
+          port: 9001,
+          base: '_gh_pages'
+        }
+      }
     }
   });
 
@@ -132,6 +150,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sync-pkg');
   grunt.loadNpmTasks('assemble-less');
   grunt.loadNpmTasks('assemble');
+   grunt.loadNpmTasks('grunt-contrib-connect'); // start webserver
 
   // Run this task once, then delete it as well as all of the "once" targets.
   grunt.registerTask('setup', ['copy:once', 'clean:once']);
@@ -141,6 +160,8 @@ module.exports = function(grunt) {
   grunt.registerTask('design', ['clean', 'assemble', 'less:site', 'watch:site']);
 
   grunt.registerTask('docs', ['readme', 'sync']);
+
+  grunt.registerTask('develop', ['connect', 'design']);
 
   // Delete this conditional logic after first run.
   if(!grunt.file.exists('_gh_pages_/assets/fonts') && !grunt.file.exists('_gh_pages_/assets/js')) {
